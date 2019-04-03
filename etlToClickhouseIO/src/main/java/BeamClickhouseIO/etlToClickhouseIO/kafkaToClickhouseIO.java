@@ -29,8 +29,8 @@ public class kafkaToClickhouseIO {
 		// 创建管道工厂
 		PipelineOptions options = PipelineOptionsFactory.create();
 		// 显式指定PipelineRunner：FlinkRunner必须指定如果不制定则为本地
-		options.setRunner(DirectRunner.class); // 显式指定PipelineRunner：FlinkRunner（Local模式）//必须指定如果不制定则为本地
-		// options.setRunner(FlinkRunner.class); //
+		//options.setRunner(DirectRunner.class); // 显式指定PipelineRunner：FlinkRunner（Local模式）//必须指定如果不制定则为本地
+		 options.setRunner(FlinkRunner.class); //
 		// 显式指定PipelineRunner：FlinkRunner（Local模式）//必须指定如果不制定则为本地
 		Pipeline pipeline = Pipeline.create(options);// 设置相关管道
 		PCollection<KafkaRecord<String, String>> lines = // 这里kV后说明kafka中的key和value均为String类型
@@ -87,7 +87,6 @@ public class kafkaToClickhouseIO {
 				ElasticsearchIO.write().withConnectionConfiguration(ElasticsearchIO.ConnectionConfiguration.create(addresses, "alarm", "TopicAlarm")
 
 		));
-
 		PCollection<Row> modelPCollection = kafkadata
 			//	 .setCoder(AvroCoder.of(AlarmTable.class))//前面设置了后面不需要重复设置编码
 				.apply(ParDo.of(new DoFn<AlarmTable, Row>() {// 实体转换成Row
@@ -104,8 +103,7 @@ public class kafkaToClickhouseIO {
 						c.output(alarmRow);
 					}
 				}));
-		// 写入 es
-
+	
 		// 写入ClickHouse
 		modelPCollection.setRowSchema(type).apply(ClickHouseIO.<Row>write("jdbc:clickhouse://192.168.1.77:8123/Alarm", "AlarmTable").withMaxRetries(3)// 重试次数
 				.withMaxInsertBlockSize(5) // 添加最大块的大小
