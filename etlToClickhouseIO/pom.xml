@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>BeamClickhouseIO</groupId>
+	<artifactId>etlToClickhouseIO</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>etlToClickhouseIO</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+         <!-- 本地运行Runners -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-runners-direct-java</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!-- 运行Runners核心jar -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-runners-core-java</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!-- 引入Beam clickhouse jar -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-sdks-java-io-clickhouse</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+			<dependency>
+			<groupId>ru.yandex.clickhouse</groupId>
+			<artifactId>clickhouse-jdbc</artifactId>
+			<version>0.1.47</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-sdks-java-core</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!--引入elasticsearch-->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-sdks-java-io-elasticsearch</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+	    <!-- BeamSQL -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-sdks-java-extensions-sql</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!-- kafka -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-sdks-java-io-kafka</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<!-- Flink -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-runners-flink_2.11</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-java</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-clients_2.11</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-core</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-runtime_2.11</artifactId>
+			<version>1.5.2</version>
+			<!--<scope>provided</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-streaming-java_2.11</artifactId>
+			<version>1.5.2</version>
+			<!--<scope>provided</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-metrics-core</artifactId>
+			<version>1.5.2</version>
+			<!--<scope>provided</scope> -->
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
