@@ -1,0 +1,121 @@
+<!-- status表示log4j2本身的日志信息打印级别，和下面的level，不是一个概念 -->
+<!--TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF-->
+<Configuration status="OFF" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} -&#45;&#45; [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+        <!-- <Property name="LOG_FILE_PATH">/var/log/spring-boot-log4j2</Property> -->
+       
+          <Property name="LOG_FILE_PATH">E:\home\log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <!-- 我打印ERROR日志 -->
+        <RollingFile name="ERROR" fileName="${LOG_FILE_PATH}/HikSpringBoot-ERROR.log"
+                     filePattern="${LOG_FILE_PATH}/HikSpringBoot-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <!--<JsonLayout complete="false" compact="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd'T'HH:mm:ss.SSSZ}" />
+            </JsonLayout>-->
+            <Filters>
+                <!-- 只记录ERROR级别日志信息，程序打印的其他信息不会被记录 -->
+                <!-- 此level设置的日志级别，是过滤日志文件中打印出的日志信息，和Root的level有所区别 -->
+                 <ThresholdFilter level="FATAL" onMatch="DENY" onMismatch="NEUTRAL"/>  
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />      
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50MB" />
+                <!-- 每天创建一个日志文件 -->
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>    
+          <!-- 我打印DEBUG日志 -->
+        <RollingFile name="DEBUG" fileName="${LOG_FILE_PATH}/HikSpringBoot-DEBUG.log"
+                     filePattern="${LOG_FILE_PATH}/HikSpringBoot-DEBUG-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <!--<JsonLayout complete="false" compact="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd'T'HH:mm:ss.SSSZ}" />
+            </JsonLayout>-->
+            <Filters>
+                <!-- 只记录ERROR级别日志信息，程序打印的其他信息不会被记录 -->
+                <!-- 此level设置的日志级别，是过滤日志文件中打印出的日志信息，和Root的level有所区别 -->
+                <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL"/>  
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50MB" />
+                <!-- 每天创建一个日志文件 -->
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+          <!-- 我打印INFO日志 -->
+        <RollingFile name="INFO" fileName="${LOG_FILE_PATH}/HikSpringBoot-INFO.log"
+                     filePattern="${LOG_FILE_PATH}/HikSpringBoot-INFO-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>   
+            <Filters>
+                <!-- 只记录INFO级别日志信息，程序打印的其他信息不会被记录 -->
+                <!-- 此level设置的日志级别，是过滤日志文件中打印出的日志信息，和Root的level有所区别 -->
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>  
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50MB" />
+                <!-- 每天创建一个日志文件 -->
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        
+              <!-- 我打印INFO日志 -->
+        <RollingFile name="WARN" fileName="${LOG_FILE_PATH}/HikSpringBoot-WARN.log"
+                     filePattern="${LOG_FILE_PATH}/HikSpringBoot-WARN-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+         
+            <Filters>
+                <!-- 只记录INFO级别日志信息，程序打印的其他信息不会被记录 -->
+                <!-- 此level设置的日志级别，是过滤日志文件中打印出的日志信息，和Root的level有所区别 -->
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>  
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50MB" />
+                <!-- 每天创建一个日志文件 -->
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        
+        
+    </Appenders>
+    <Loggers>
+       <!-- AsyncRoot - 异步记录日志 - 需要LMAXDisruptor的支持 -->
+        <!-- <AsyncRootlevel="info" additivity="false">
+          <AppenderRef ref="Console"/>
+          <AppenderRef ref="FileAppender"/>
+        </AsyncRoot> -->
+
+        <!-- All < Trace < Debug < Info < Warn < Error < Fatal < OFF. -->
+　　　　 <!-- 程序会打印高于或等于所设置级别的日志，设置的日志等级越高，打印出来的日志就越少。-->
+        <!-- 此level设置的日志级别，是过滤项目中输出的日志信息，和ThresholdFilter的level有所区别 -->
+        <Root level="Debug">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="ERROR"/>
+            <AppenderRef ref="DEBUG"/>
+            <AppenderRef ref="INFO"/>
+             <AppenderRef ref="WARN"/>
+        </Root>
+    </Loggers>
+</Configuration>

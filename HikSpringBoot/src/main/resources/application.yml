@@ -1,0 +1,120 @@
+server:
+  port: 8090
+  
+
+ 
+ 
+ 
+    
+#默认使用配置
+spring:
+ application:
+    name: Spring boot Adminweb
+    url: http://localhost:8090 
+
+     
+ profiles:
+    active: dev
+
+#公共配置与profiles选择无关
+mybatis:
+  typeAliasesPackage: com.hikvision.entity
+  mapperLocations: classpath:mapper/*.xml
+
+
+---
+
+
+
+#开发配置
+spring:
+  profiles: dev
+  datasource:
+    #数据源名称
+    name: demo
+    url: jdbc:mysql://localhost:3306/searchdb
+    username: root
+    password: 123456
+    #password: frXGJcvSzdmOD1UW4KtmJ+GpiS4Zx/IFOeSyXQPQ2iUOzFP0usauV84dMYZF8NCTL77YeBTfxo8fwEn/s5cahA==
+    driver-class-name: com.mysql.jdbc.Driver
+    #使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid: 
+     filters: config,stat,wall,log4j
+     #配置初始化大小/最小/最大
+     initial-size: 1
+     min-idle: 1
+     max-active: 20
+     #获取连接等待超时时间
+     max-wait: 60000
+     #间隔多久进行一次检测，检测需要关闭的空闲连接
+     time-between-eviction-runs-millis: 60000
+     #一个连接在池中最小生存的时间
+     min-evictable-idle-time-millis: 300000
+     validation-query: SELECT 'x'
+     test-while-idle: true
+     test-on-borrow: false
+     test-on-return: false
+     #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+     pool-prepared-statements: false
+     max-pool-prepared-statement-per-connection-size: 20 
+     connectionProperties: config.decrpt=true;druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAI+4EOliQKpvhoqJtTBcTRS9xuKhPchzR8X+WwXkDeD4nbaqNC5t8AXJQnZsaITz9cOzCgeWh3FBRa5duu89fr8CAwEAAQ==
+ 
+     web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*' 
+        url-pattern: /*
+        profile-enable: true
+        session-stat-max-count: 1000
+        session-stat-enable: true
+     stat-view-servlet:
+       login-username: root
+       login-password: 12345
+       url-pattern: /druid/*
+       reset-enable: true
+       allow: 
+       deny: 10.192.33.196
+#kafka的配置
+  kafka:
+    bootstrap-servers:
+    - 101.201.56.77:9092
+    consumer:
+      group-id: testremsg
+      enable-auto-commit: true
+      auto-offset-reset: latest
+      bootstrap-servers:
+      - 101.201.56.77:9092
+      max-poll-records: 50
+ #redis配置
+  redis:
+  #redis基础配置
+    host: 10.192.32.98
+    port: 6379
+    password: 123456
+    database: 5
+    timeout: 3000 # 连接超时时间 单位 ms（毫秒）
+  #redis线程池设置
+    jedis:
+      pool:
+        min-idle: 100 #连接池中的最小空闲连接，默认值也是0
+        max-active: 300 # 如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
+        # 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException
+        max-wait: 200 
+        max-idle: 500 # 连接池中的最大空闲连接，默认值也是8。
+    #redis哨兵设置
+   # sentinel:
+   #  master: master8026
+   #  nodes:
+   #  - 10.192.32.202:11092,10.192.32.202:12092,10.192.32.202:13092
+   
+      
+#log4j2日志文件的配置
+logging:
+     config: classpath:log4j2.xml
+
+     
+       
+        
+   
+    
+    
+    
