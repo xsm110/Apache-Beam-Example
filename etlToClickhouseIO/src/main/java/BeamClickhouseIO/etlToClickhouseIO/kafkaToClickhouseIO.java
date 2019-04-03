@@ -34,7 +34,7 @@ public class kafkaToClickhouseIO {
 		// 显式指定PipelineRunner：FlinkRunner（Local模式）//必须指定如果不制定则为本地
 		Pipeline pipeline = Pipeline.create(options);// 设置相关管道
 		PCollection<KafkaRecord<String, String>> lines = // 这里kV后说明kafka中的key和value均为String类型
-				pipeline.apply(KafkaIO.<String, String>read().withBootstrapServers("101.201.56.77:9092")// 必需设置kafka的服务器地址和端口
+				pipeline.apply(KafkaIO.<String, String>read().withBootstrapServers("192.168.1.77:9092")// 必需设置kafka的服务器地址和端口
 						.withTopic("TopicAlarm")// 必需，设置要读取的kafka的topic名称
 						
 						.withKeyDeserializer(StringDeserializer.class)// 必需序列化key
@@ -61,7 +61,7 @@ public class kafkaToClickhouseIO {
 				ctx.output(modelTable);// 回传实体
 			}
 		}));
-		String[] addresses = { "http://101.201.56.77:9200/" };
+		String[] addresses = { "http://192.168.1.77:9200/" };
 		PCollection<String> jsonCollection=kafkadata
 				.setCoder(AvroCoder.of(AlarmTable.class))
 				.apply("covert json", ParDo.of(new DoFn<AlarmTable, String>() {
@@ -107,7 +107,7 @@ public class kafkaToClickhouseIO {
 		// 写入 es
 
 		// 写入ClickHouse
-		modelPCollection.setRowSchema(type).apply(ClickHouseIO.<Row>write("jdbc:clickhouse://101.201.56.77:8123/Alarm", "AlarmTable").withMaxRetries(3)// 重试次数
+		modelPCollection.setRowSchema(type).apply(ClickHouseIO.<Row>write("jdbc:clickhouse://192.168.1.77:8123/Alarm", "AlarmTable").withMaxRetries(3)// 重试次数
 				.withMaxInsertBlockSize(5) // 添加最大块的大小
 				.withInitialBackoff(Duration.standardSeconds(5))// 初始退回时间
 				.withInsertDeduplicate(true) // 重复数据是否删除
