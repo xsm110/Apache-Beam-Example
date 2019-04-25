@@ -5,7 +5,7 @@ Apache Beam Example 中国开源社区
 里面是Beam 项目实战的例子，欢迎大家进入进行更新。想加入进来的请联系微信cyrjkj
 
 以下文章转自我发的
-系列文章第一篇回顾[Apache Beam 实战指南 | 基础入门](https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247486109&amp;idx=1&amp;sn=07505c089eda36bfa474827ad577ae61&source=41#wechat_redirect)、第二篇回顾[Apache Beam 实战指南 | 手把手教你玩转 KafkaIO 与 Flink](https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247492538&idx=2&sn=9a2bd9fe2d7fd681c10ebd368ef81c9c&chksm=fbea5a75cc9dd3636c148ebe6e296621d0c07132938a62f0b3643f34af414b3fd85e616e754b&scene=27#wechat_redirect)、第三篇回顾[Apache Beam实战指南 | 手把手教你玩转大数据存储HdfsIO](https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247494843&idx=2&sn=0dd20caec76e25b80e86ec5ce01868ef&chksm=fbea5574cc9ddc62927fce397c2e05b5e9ac0bbe1eef021286b2b728028bbfcb66cf31b1006c&scene=27#wechat_redirect)。
+系列文章第一篇回顾[Apache Beam 实战指南 | 基础入门](https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247486109&amp;idx=1&amp;sn=07505c089eda36bfa474827ad577ae61&source=41#wechat_redirect)、第二篇回顾[Apache Beam 实战指南 | 手把手教你玩转 KafkaIO 与 Flink](https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247492538&idx=2&sn=9a2bd9fe2d7fd681c10ebd368ef81c9c&chksm=fbea5a75cc9dd3636c148ebe6e296621d0c07132938a62f0b3643f34af414b3fd85e616e754b&scene=27#wechat_redirect)、第三篇回顾[Apache Beam实战指南 | 手把手教你玩转大数据存储HdfsIO](https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247494843&idx=2&sn=0dd20caec76e25b80e86ec5ce01868ef&chksm=fbea5574cc9ddc62927fce397c2e05b5e9ac0bbe1eef021286b2b728028bbfcb66cf31b1006c&scene=27#wechat_redirect)、第四篇回顾 [Apache Beam实战指南 | 如何结合ClickHouse打造“AI微服务”？。](https://mp.weixin.qq.com/s/aYamtorps8QFwhCD685B0Q)。
 
 Beam
 -----
