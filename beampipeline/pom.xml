@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hik.beampipeline</groupId>
+  <artifactId>beampipeline</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <name>beampipeline</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    	<!-- 本地运行Runners -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-runners-direct-java</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<!-- 运行Runners核心jar -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-runners-core-java</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-sdks-java-core</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+	   	<!-- kafka -->
+		<dependency>
+			<groupId>org.apache.beam</groupId>
+			<artifactId>beam-sdks-java-io-kafka</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+    
+  </dependencies>
+</project>
